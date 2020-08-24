@@ -14,6 +14,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
+
 if (process.env.NODE_ENV === 'development') {
   mongoose.connect('mongodb://localhost:27017/employees-directory');
 }
@@ -30,6 +33,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 let allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Allow-Credentials', 'true');
   next();
 };
